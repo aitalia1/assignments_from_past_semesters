@@ -2,12 +2,10 @@
 
 using namespace std;
 
-int counter = 0; //global variable
-
-int digitcount(int n); //prototype
+int digitcount(long long n); //prototype
 
 int main() {
-    int number1;
+    long long number1;
 
     cout << "input a number: ";
     cin >> number1;
@@ -17,16 +15,16 @@ int main() {
 }
 
 /**
-* There is a known issue in this recursive function that I intend to fix tomorrow, 3/29/2025.
-* When "int n" is greater than 10, it will always return a value of 10 regardless if the value is 10 or 100 or more.
-*/
-int digitcount(int n) {
+ * The issue that caused the output of a number with a digit count greater than 10 to output 10
+ * was the fact that the int data type is not large enough to handle a number of that size. It caps at 10.
+ * The issue was with the data type, not the implementation as I had expected. 4/25/2025
+ *
+ * This program is used by inputing a number, the recursive function digitcount divides that number by ten until it reaches the end.
+ * The end being how many digits are in the given number provided by the user.
+ */
+
+int digitcount(long long n) {
     if(n == 0) { return 1; } //base case
-
-    counter++;
-    if(n > 1) {
-        digitcount(n / 10);
-    }
-
-    return counter; //returns the number of digits within a given number.
+    
+    return 1 + digitcount(n / 10); //returns the number of digits within a given number.
 }
